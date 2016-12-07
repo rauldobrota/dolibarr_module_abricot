@@ -460,3 +460,73 @@ function Get_column_list($table, $alias = '') {
 }
 
 }
+
+class TQueryBuilder {
+	
+	function __construct() {
+		
+		$this->sql = '';
+		
+		$this->TField=array();
+		
+		$this->table = '';
+		
+		$this->TCondition = array();
+	}
+	
+	function build() {
+		
+		$Tab = array();
+		if(!empty($this->TField)) {
+			
+			foreach($this->TField as $k=>$v) {
+				
+				if(!is_int($k) ) {
+					$Tab[]=$k.' as '.$v;
+				}
+				else{
+					$Tab[]=$v;
+				}
+				
+			}
+			$fields .= implode(', ', $Tab);
+		}
+		else{
+			$fields ='*';
+		}
+		
+		$this->sql='SELECT '.$fields.' FROM '.MAIN_DB_PREFIX.$this->table ;
+		
+		if(!empty($this->TCondition)) {
+			
+			$this->sql.=' WHERE 1 ';
+			
+			foreach($this->TCondition as $k=>$where) {
+				
+				$this->sql.=$where[1] . ' '.$where[0];
+				
+			}
+			
+		}
+		
+		
+		return $this->sql;
+	}
+	
+	function select($table, $TField=array()) {
+		
+		$this->TField = $this->TField + $TField;
+		$this->table = $table;
+		
+		return $this;
+	}
+	
+	function where($condition, $with='AND') {
+		
+		$this->TCondition[] = array($condition,$with);
+		
+		return $this;
+	}
+	
+}
+
