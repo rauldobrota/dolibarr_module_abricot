@@ -1,0 +1,8 @@
+SearchOnNUllValue=Caută după valorile NULL
+
+Settings=Parametri
+set_ABRICOT_USE_OLD_DATABASE_ENCODING_SETTING = Utilizează setările vechi de encoding pe baza de date
+set_ABRICOT_USE_OLD_EMPTY_DATE_FORMAT = Utilizează setările vechi goale de encoding pe baza de date
+
+MIGRATE_DATETIME_DEFAULT_TO_NULL = Schimbă formatul implicit DATETIME în NULL
+Migrate=Schimbă
